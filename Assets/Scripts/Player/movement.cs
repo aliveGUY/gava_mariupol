@@ -5,19 +5,29 @@ using UnityEngine;
 public class movement : MonoBehaviour
 {
     public float speed;
+    public float rotationSpeed;
+    public float jumpHeight;
 
     private Rigidbody rb;
-    private Vector3 x ,y;
+    private Vector3 moveDirection;
 
     private void Start()
     {
+        Physics.gravity = new Vector3(0,-200,0);
         rb = GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
     {
-        x = new Vector3(transform.forward.x * Input.GetAxis("Vertical"), 0, transform.forward.z * Input.GetAxis("Vertical"));
-        y = new Vector3(transform.right.x * Input.GetAxis("Horizontal"), 0, transform.right.z * Input.GetAxis("Horizontal"));
-        rb.velocity = (x + y) * speed;
+        moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        rb.velocity = moveDirection * speed ;
+
+        if(moveDirection != Vector3.zero){
+            Quaternion toRotaion = Quaternion.LookRotation(moveDirection, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotaion, rotationSpeed);
+        }
+        if (Input.GetButton("Jump")) {
+            rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
+        } 
     }
 }
