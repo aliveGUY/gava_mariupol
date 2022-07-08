@@ -46,6 +46,7 @@ public class movement : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotaion, rotationSpeed);
         }
     }
+
     private void OnCollisionEnter(Collision c) {
         if(c.collider.gameObject.layer == 3) {
             grounded = true;

@@ -25,6 +25,16 @@ public class animations : MonoBehaviour
             anim.SetBool("IsJumping", false);
         }
 
+
+
+        if(Input.GetKey(KeyCode.LeftShift)) {
+            movement.speed = 8f;
+            anim.SetBool("IsRunning", true);
+        } else {
+            movement.speed = 2f;
+            anim.SetBool("IsRunning", false);
+        }
+
         if(movement.fallingThreshold < 3 && !movement.grounded) {
             anim.SetBool("IsFalling", true);
             movement.gravityScale = 10f;
