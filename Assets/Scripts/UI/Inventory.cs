@@ -15,6 +15,8 @@ public class Inventory : MonoBehaviour
     {
         inventory_btn.onClick.AddListener(OpenInventory);
         inventory.Init(storage.storage_items);
+            Debug.Log(inventory_btn);
+
     }
 
     public void AddItem(Item item) {
