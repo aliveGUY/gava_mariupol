@@ -51,15 +51,15 @@ public class InstantiateDialogue : MonoBehaviour
 
     private void Update()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) < 1.5f && dialogueEnded == false)
-        {
-            Window.SetActive(true);
-        }
-        else
-        {
-            Window.SetActive(false);
+        //if (Vector3.Distance(player.transform.position, transform.position) < 1.5f && dialogueEnded == false)
+        //{
+        //    Window.SetActive(true);
+        //}
+        //else
+        //{
+        //    Window.SetActive(false);
 
-        }
+        //}
 
     }
 
