@@ -1,0 +1,12 @@
+<dialoque>
+ <node>
+ <npctext>Привет, я хлеб</npctext>
+ <answers> 
+    <answer tonode = "1"> <text>Нет я хлеб</text> </answer>
+    <answer tonode = "2"> <text>Ты хлеб?</text> </answer>
+ </answers>
+ </node>
+<npctext> Я хлеб </npctext>
+<dialend>true</dialend>
+ <node 
+ <dialoque>
