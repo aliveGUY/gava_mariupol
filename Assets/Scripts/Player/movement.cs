@@ -6,7 +6,7 @@ public class movement : MonoBehaviour
 {
     public float speed = 2;
     public float rotationSpeed = 10;
-    public float jumpHeight = 15;
+    public float jumpHeight = 3;
     public float gravityScale = 5;
     [HideInInspector]
     public bool grounded = true;
