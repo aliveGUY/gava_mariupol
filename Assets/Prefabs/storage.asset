@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2b6f0cd75de6fe59a7006b300353c23, type: 3}
   m_Name: storage
   m_EditorClassIdentifier: 
+  mental_health: 0.06200928
+  hunger: 100
