@@ -6,4 +6,6 @@ using UnityEngine;
 public class Player_Storage : ScriptableObject
 {
     public List<Item> storage_items {get; set; }
+    public float mental_health = 1f;
+    public float hunger = 100f;
 }
