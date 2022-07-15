@@ -6,22 +6,42 @@ public class Dialogue : MonoBehaviour
 {
     public DialogueNode[] node;
     public int _currentNode;
-    public bool ShowDialogue = true;
+    public bool ShowDialogue = false;
     public int CountDialoque = 0;
-
     public GUISkin skin;
+    public bool TriggerEnter = false;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && TriggerEnter == true)
+        { ShowDialogue = true; }
+    }
 
 
+    private void OnTriggerEnter(Collider other)
+    {
+        TriggerEnter = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        TriggerEnter = false; 
+    }
+
+    private void DialogActive()
+    {
+
+    }
     void OnGUI()
     {
 
         GUI.skin = skin;
-        if (Input.GetMouseButtonDown(0))
-        {
+        //if (Input.GetMouseButtonDown(0))
+        //{
 
-            ShowDialogue = true;
+        //    ShowDialogue = true;
 
-        }
+        //}
 
 
         if (ShowDialogue == true)
@@ -31,7 +51,7 @@ public class Dialogue : MonoBehaviour
 
             if (CountDialoque >= 1)
             {
-                _currentNode = 2;
+                _currentNode = node.Length - 1;
                 if (GUI.Button(new Rect(Screen.width / 2 - 250, Screen.height - 200 + 25 * 0, 500, 25), node[_currentNode].PlayerAnswer[0].Text))
                 {
                     if (node[_currentNode].PlayerAnswer[0].SpeakEnd)
