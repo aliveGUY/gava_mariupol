@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Mariupol/Theater_and_home.unity
+    guid: ce29113f05a5fd149ae38864b8dc940d
+  - enabled: 1
+    path: Assets/Scenes/Mariupol/PlayerAppartament.unity
+    guid: 5d34db480ee48c648ab75464e56cf06f
+  - enabled: 1
+    path: Assets/Scenes/Mariupol/Basement1.unity
+    guid: 9153a55f89cb8714882e564ef8f1c5ad
+  - enabled: 1
+    path: Assets/Scenes/Development.unity
+    guid: ff1fee0c376375a4b9e09b3f8da4a3ce
   m_configObjects: {}
