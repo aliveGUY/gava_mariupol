@@ -1,47 +1,100 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Xml.Serialization;     //запись и чтение xml файла
-using System.IO;
 
-[XmlRoot("dialogue")]
-public class Dialogue
+public class Dialogue : MonoBehaviour
 {
+    public DialogueNode[] node;
+    public int _currentNode;
+    public bool ShowDialogue = false;
+    public int CountDialoque = 0;
+    public GUISkin skin;
+    public bool TriggerEnter = false;
 
-    [XmlElement("text")]
-    public string text;
-
-    [XmlElement("node")]
-    public Node[] nodes;
-
-    public static Dialogue Load(TextAsset _xml)
+    private void Update()
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(Dialogue));
-        StringReader reader = new StringReader(_xml.text);
-        Dialogue dial = serializer.Deserialize(reader) as Dialogue;
-        return dial;
+        if (Input.GetKeyDown(KeyCode.E) && TriggerEnter == true)
+        { ShowDialogue = true; }
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        TriggerEnter = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        TriggerEnter = false; 
+    }
+
+    private void DialogActive()
+    {
+
+    }
+    void OnGUI()
+    {
+
+        GUI.skin = skin;
+        //if (Input.GetMouseButtonDown(0))
+        //{
+
+        //    ShowDialogue = true;
+
+        //}
+
+
+        if (ShowDialogue == true)
+        {
+            GUI.Box(new Rect(Screen.width / 2 - 300, Screen.height - 300, 600, 250), "");
+            GUI.Label(new Rect(Screen.width / 2 - 250, Screen.height - 280, 500, 90), node[_currentNode].NpcText);
+
+            if (CountDialoque >= 1)
+            {
+                _currentNode = node.Length - 1;
+                if (GUI.Button(new Rect(Screen.width / 2 - 250, Screen.height - 200 + 25 * 0, 500, 25), node[_currentNode].PlayerAnswer[0].Text))
+                {
+                    if (node[_currentNode].PlayerAnswer[0].SpeakEnd)
+                    {
+
+                        ShowDialogue = false;
+                    }
+                }
+            }
+
+            for (int i = 0; i < node[_currentNode].PlayerAnswer.Length; i++)
+            {
+                if (GUI.Button(new Rect(Screen.width / 2 - 250, Screen.height - 200 + 25 * i, 500, 25), node[_currentNode].PlayerAnswer[i].Text))
+                {
+                    if (node[_currentNode].PlayerAnswer[i].SpeakEnd)
+                    {
+
+                        ShowDialogue = false;
+                        CountDialoque++;
+                    }
+                    _currentNode = node[_currentNode].PlayerAnswer[i].ToNode;
+                }
+            }
+
+
+
+        }
     }
 }
 
 [System.Serializable]
-public class Node
+public class DialogueNode
 {
-    [XmlElement("npctext")]
-    public string Npctext;
-
-    [XmlArray("answers")]
-    [XmlArrayItem("answer")]
-    public Answer[] answers;
+    public string NpcText;
+    public Answer[] PlayerAnswer;
 }
 
+
+[System.Serializable]
 public class Answer
 {
-    [XmlAttribute("tonode")]
-    public int nextNode;
-    [XmlElement("text")]
-    public string text;
-    [XmlElement("dialend")]
-    public string end;
-
+    public string Text;
+    public int ToNode;
+    public bool SpeakEnd;
 }
 
